@@ -1,52 +1,60 @@
 import speech_recognition as sr
-from time import ctime
-import time
-import os
-import gTTS
- 
-def speak(audioString):
-    print(audioString)
-    tts = gTTS(text=audioString, lang='en')
-    tts.save("audio.mp3")
-    os.system("mpg321 audio.mp3")
- 
-def recordAudio():
-    # Record Audio
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Say something!")
-    audio = r.listen(source)
- 
-    # Speech recognition using Google Speech Recognition
-    data = ""
-    try:
-        # Uses the default API key
-        # To use another API key: `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-        data = r.recognize_google(audio)
-        print("You said: " + data)
-    except sr.UnknownValueError:
-        print("Google Speech Recognition could not understand audio")
-    except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
- 
-    return data
- 
-def jarvis(data):
-    if "how are you" in data:
-        speak("I am fine")
- 
-    if "what time is it" in data:
-        speak(ctime())
- 
-    if "where is" in data:
-        data = data.split(" ")
-        location = data[2]
-        speak("Hold on Frank, I will show you where " + location + " is.")
-        os.system("chromium-browser https://www.google.nl/maps/place/" + location + "/&amp;")
- 
-# initialization
-time.sleep(2)
-speak("Hi Frank, what can I do for you?")
-while 1:
-    data = recordAudio()
-    jarvis(data)
+from tkinter import *
+
+def speak():
+    i = -1
+    x = 1
+    y = 0
+    while i < 0:
+        with sr.Microphone() as source:
+            audio = r.listen(source)
+            s = r.recognize_google(audio)
+            #print("Say something: ")
+        
+        try:
+            response = "you said '" + s + "'"
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            x+=1
+            #print ("you said '" + r.recognize_google(audio) + "'")
+        except sr.UnkownValueError:
+            response = "could not understand audio"
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            x+=1
+            #print ("could not understand audio")
+        except sr.RequestError as e:
+            response = "Could not request results from Google Speech Recognition service; {0}".format(e)
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            x+=1
+            #print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        if "how are you" in s:
+            response = "I am fine"
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            x+=1
+            #print ("I am fine")
+        if "exit" or "quit"  or "leave" in s:
+            response = "bye"
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            
+            i+=1
+
+root = Tk()
+root.title("digital assistant")
+
+r = sr.Recognizer()
+
+prompt = "Press to speak: "
+labelText = StringVar()
+labelText.set(prompt)
+label = Label(root, textvariable = labelText)
+
+speak_button = Button(root, text = "", width = 5 ,command = speak)
+
+label.grid(row = 0, column = 0)
+speak_button.grid(row = 0, column = 3)
+
+root.mainloop()
