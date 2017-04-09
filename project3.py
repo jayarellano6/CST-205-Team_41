@@ -2,7 +2,6 @@ import speech_recognition as sr
 from tkinter import *
 
 def speak():
-    i = -1
     x = 1
     y = 0
     while i < 0:
@@ -39,8 +38,8 @@ def speak():
             response = "bye"
             left = Label(root, text= response)
             left.grid(row = x, column = y)
+            #still needs window close code
             
-            i+=1
 
 root = Tk()
 root.title("digital assistant")
