@@ -51,5 +51,3 @@ label.grid(row = 0, column = 0)
 speak_button.grid(row = 0, column = 3)
 
 root.mainloop()
-
-
