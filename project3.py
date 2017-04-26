@@ -25,20 +25,13 @@ def speak():
     mixer.init()
     mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
     mixer.music.play()
-    time.sleep(1.5)
+    time.sleep(2)
     x+=1
-    '''if sr.UnkownValueError:
-        response = "could not understand audio"
-        left = Label(root, text= response)
-        left.grid(row = x, column = y)
-        x+=1'''
-    '''if sr.RequestError as e:
-        response = "Could not request results from Google Speech Recognition service; {0}".format(e)
-        left = Label(root, text= response)
-        left.grid(row = x, column = y)
-        x+=1'''
-    if "hello\n" in s:
-        response = "hey jay"
+    
+    if "hello" in s:
+        r = randint(0, 5)
+        rs = ["hey", "hello to you", "whats up", "hi", "suh dude", "hey you"]
+        response = rs[r]
         left = Label(root, text= response)
         left.grid(row = x, column = y)
         tts = gTTS(text=response, lang='en')
@@ -67,7 +60,7 @@ def speak():
             mixer.init()
             mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
             mixer.music.play()
-            time.sleep(1.8)
+            time.sleep(2)
             x+=1
             if "yes" in s:
                 def speak3():
@@ -88,16 +81,16 @@ def speak():
                     mixer.init()
                     mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
                     mixer.music.play()
-                    time.sleep(1.5)
+                    time.sleep(2)
                     server = smtplib.SMTP('smtp.gmail.com', 587)
                     server.starttls()
                     server.login("cst205.digital.assistant@gmail.com", "CST205jpj")
  
                     msg = s
-                    server.sendmail("cst205.digital.assistant@gmail.com", "resteybar@csumb.edu", msg)
+                    server.sendmail("cst205.digital.assistant@gmail.com", "jayarellano1129@gmail.com", msg)
                     server.quit()
                     x+=1
-                response = "say the message you want me to send:"
+                response = "ok i will do that, say the message you want me to send:"
                 left = Label(root, text= response)
                 left.grid(row = x, column = y)
                 tts = gTTS(text=response, lang='en')
@@ -134,7 +127,9 @@ def speak():
         time.sleep(2)
         speak2()
     elif "how are you" in s:
-        response = "I am fine"
+        r = randint(0, 5)
+        rs = ["i am fine", "i don't want to talk about it", "i'm great!", "terrible", "i don't know how i am", "i cant't tell"]
+        response = rs[r]
         left = Label(root, text= response)
         left.grid(row = x, column = y)
         tts = gTTS(text=response, lang='en')
@@ -155,7 +150,9 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
     elif "joke" in s:
-        response = "I would but you are not worthy of my comedic stature?"
+        r = randint(0, 5)
+        rs = ["i don't have any", "i cant", "a joke", "you", "knock knock, who's there? no one", "i cannot understand 'joke'"]
+        response = rs[r]
         left = Label(root, text= response)
         left.grid(row = x, column = y)
         tts = gTTS(text=response, lang='en')
@@ -187,7 +184,7 @@ labelText = StringVar()
 labelText.set(prompt)
 label = Label(root, bg= "gray13", textvariable = labelText, fg= "White")
 
-speak_button = Button(root, text = "(^.^)", width = 6 ,command = speak)
+speak_button = Button(root, text = "(^o^)", width = 6 ,command = speak)
 
 label.grid(row = 0, column = 0)
 speak_button.grid(row = 0, column = 3)
