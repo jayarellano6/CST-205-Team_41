@@ -14,13 +14,12 @@ try:
     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
     # instead of `r.recognize_google(audio)`
     data = r.recognize_google(audio)
-    data = ' '.join(word[0].upper() + word[1:] for word in data.split())
     tts = gTTS(text = data, lang = 'en')
     tts.save("good.mp3")
     mixer.init()
     mixer.music.load('/Users/noobkittyyuki/Desktop/good.mp3')
     mixer.music.play()
-    print("You said '" + r.recognize_google(audio)+ "")
+    print("You said '" + r.recognize_google(audio) + "'")
 except sr.UnknownValueError:
     print("Google Speech Recognition could not understand audio")
 except sr.RequestError as e:
