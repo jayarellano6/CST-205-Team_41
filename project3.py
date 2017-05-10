@@ -16,6 +16,7 @@ from oauth2client.file import Storage
 
 import datetime
 import sys
+import webbrowser
 
 try:
     import argparse
@@ -102,7 +103,7 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
         x+=1
-    if "reminder" in s:
+    elif "reminder" in s:
         def speak2():
             j = randint(0,10000000)
             k = randint(0,10000000)
@@ -161,7 +162,7 @@ def speak():
                 mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
                 mixer.music.play()
                 x+=1
-                time.sleep(2)
+                time.sleep(4)
                 speak3()
             if "no" in s:
                 response = "ok nevermind"
@@ -185,9 +186,9 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
         x+=1
-        time.sleep(2)
+        time.sleep(2.5)
         speak2()
-    if "calendar" in s:
+    elif "calendar" in s:
         def speak2():
             j = randint(0,10000000)
             k = randint(0,10000000)
@@ -197,7 +198,7 @@ def speak():
                 audio = r.listen(source)
                 s = r.recognize_google(audio)
         
-            '''response = "you said '" + s + "'"
+            response = "you said '" + s + "'"
             left = Label(root, text= response)
             left.grid(row = x, column = y)
             tts = gTTS(text=response, lang='en')
@@ -207,7 +208,7 @@ def speak():
             mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
             mixer.music.play()
             time.sleep(2)
-            x+=1'''
+            x+=1
             if "yes" in s:
                 def speak3():
                     j = randint(0,10000000)
@@ -218,7 +219,7 @@ def speak():
                         audio = r.listen(source)
                         s = r.recognize_google(audio)
         
-                    '''response = "you said '" + s + "'"
+                    response = "you said '" + s + "'"
                     left = Label(root, text= response)
                     left.grid(row = x, column = y)
                     tts = gTTS(text=response, lang='en')
@@ -227,7 +228,7 @@ def speak():
                     mixer.init()
                     mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
                     mixer.music.play()
-                    time.sleep(2)'''
+                    time.sleep(2)
                     credentials = get_credentials()
                     http = credentials.authorize(httplib2.Http())
                     service = discovery.build('calendar', 'v3', http=http)
@@ -246,7 +247,7 @@ def speak():
                 mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
                 mixer.music.play()
                 x+=1
-                time.sleep(2)
+                time.sleep(5)
                 speak3()
             if "no" in s:
                 response = "ok nevermind"
@@ -270,6 +271,7 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
         x+=1
+        time.sleep(3)
         speak2()
     elif "how are you" in s:
         t = randint(0, 5)
@@ -296,7 +298,7 @@ def speak():
         mixer.music.play()
     elif "joke" in s:
         t = randint(0, 5)
-        rs = ["i don't have any", "i cant", "a joke", "you", "knock knock, who's there? no one", "i cannot understand 'joke'"]
+        rs = ["i don't have any", "i can't", "a joke", "you", "knock knock, who's there? no one", "i cannot understand 'joke'"]
         response = rs[t]
         left = Label(root, text= response)
         left.grid(row = x, column = y)
@@ -307,6 +309,50 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
     else:
+        def speak2():
+            j = randint(0,10000000)
+            k = randint(0,10000000)
+            x = 1
+            y = 0
+            with sr.Microphone() as source:
+                audio = r.listen(source)
+                web = r.recognize_google(audio)
+        
+            response = "you said '" + web + "'"
+            left = Label(root, text= response)
+            left.grid(row = x, column = y)
+            tts = gTTS(text=response, lang='en')
+            tts.save(str(j) + ".mp3")
+            os.system("mpg321 " + str(j) + ".mp3")
+            mixer.init()
+            mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(j) + ".mp3")
+            mixer.music.play()
+            time.sleep(2)
+            x+=1
+            if "yes" in web:
+                response = "ok opening google now"
+                left = Label(root, text= response)
+                left.grid(row = x, column = y)
+                tts = gTTS(text=response, lang='en')
+                tts.save(str(k) + ".mp3")
+                os.system("mpg321 " + str(k) + ".mp3")
+                mixer.init()
+                mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
+                mixer.music.play()
+                time.sleep(2)
+                url = "https://www.google.co.in/search?q=" +(s)+ "&oq="+(s)+"&gs_l=serp.12..0i71l8.0.0.0.6391.0.0.0.0.0.0.0.0..0.0....0...1c..64.serp..0.0.0.UiQhpfaBsuU"
+                webbrowser.open_new(url)
+            if "no" in web:
+                response = "ok nevermind"
+                left = Label(root, text= response)
+                left.grid(row = x, column = y)
+                tts = gTTS(text=response, lang='en')
+                tts.save(str(k) + ".mp3")
+                os.system("mpg321 " + str(k) + ".mp3")
+                mixer.init()
+                mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
+                mixer.music.play()
+                x+=1
         response = "Huh, I dont have any results for '" + s + "' do you want to search the web? " 
         left = Label(root, text= response)
         left.grid(row = x, column = y)
@@ -317,17 +363,19 @@ def speak():
         mixer.music.load("/Users/jayarellano/AppData/Local/Programs/Python/Python36/" + str(k) + ".mp3")
         mixer.music.play()
         x+=1
+        time.sleep(5)
+        speak2()
 
 root = Tk()
 root.title("digital assistant")
-root.configure(background = "gray13")
+root.configure(background = "navy")
 
 r = sr.Recognizer()
 
 prompt = "Press to speak:  "
 labelText = StringVar()
 labelText.set(prompt)
-label = Label(root, bg= "gray13", textvariable = labelText, fg= "White")
+label = Label(root, bg= "navy", textvariable = labelText, fg= "White")
 
 speak_button = Button(root, text = "\(^.^)/", width = 6 ,command = speak)
 
