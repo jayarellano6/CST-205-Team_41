@@ -4,6 +4,7 @@ CST 205 project 3
 Final Project Digital Assistant
 
 Team Members: Jay Arellano, Jashmae Baculpo, Pricsilla Nunez
+
 Class: CST-205
 
 link for GitHub: https://github.com/jayarellano6/CST-205-Team_41
